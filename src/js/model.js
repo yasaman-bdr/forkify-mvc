@@ -17,7 +17,6 @@ export const loadRecipe = async function (id) {
     try{
 
       const data = await getJSON(`${API_URL}${id}`)
-        console.log('DATA',data)
       const {recipe} = data.data
   
       state.recipe = {
@@ -58,7 +57,6 @@ export const loadSearchResults = async function (query) {
     })
     state.search.page = 1
 
-    console.log(state.search.results)
   }catch(err){
     console.error(`${err}💥💥💥`)
     throw(err)
