@@ -1,7 +1,3 @@
-
-// import {Fraction} from './fractional'
-// console.log(Fraction)
-
 import view from "./view";
 
 class RecipeView extends view {
