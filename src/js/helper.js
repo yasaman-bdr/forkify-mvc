@@ -11,16 +11,43 @@ const timeout = function (s) {
 
 
 export const getJSON = async function (url) {
-try{
-    const fetchPro = fetch(url)
-    const res = await Promise.race([fetchPro , timeout(TIMEOUT_SEC)])   
+  try{
+      const fetchPro = fetch(url)
+      const res = await Promise.race([fetchPro , timeout(TIMEOUT_SEC)])   
 
-    const data = await res.json()
-  
-    if(!res.ok) throw new Error(`${data.message} (${data.status})`)
+      const data = await res.json()
+    
+      if(!res.ok) throw new Error(`${data.message} (${data.status})`)
 
-    return data
-}catch(err){
-    throw err;
+      return data
+  }catch(err){
+      throw err;
+  }
 }
+
+export const sendJSON = async function (url , uploadData) {
+  try{
+      const fetchPro = fetch(url, {
+        method: "POST",
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(uploadData)
+      })
+
+      const res = await Promise.race([fetchPro , timeout(TIMEOUT_SEC)])  
+      const data = await res.json()
+    
+      if(!res.ok) throw new Error(`${data.message} (${data.status})`)
+
+      return data
+  }catch(err){
+      throw err;
+  }
 }
+
+export const makeId = () => {
+  return Date.now().toString(36) + Math.random().toString(36).substr(2);
+}
+
+export const delay = () => new Promise((resolve) => setTimeout(resolve(true),2000))

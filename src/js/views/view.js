@@ -2,7 +2,6 @@ export default class view {
     _data;
 
     render(data , render = true){
-       
       if(!data || (Array.isArray(data) && data.length === 0)) 
           return this.renderError();
 
@@ -25,8 +24,7 @@ export default class view {
 
       newElements.forEach((newEl , i) => {
         const curEl = curElements[i]
-        console.log(curEl , newEl.isEqualNode(curEl))
-        
+                
         //updates changed TEXT 
         if(!newEl.isEqualNode(curEl) && newEl.firstChild?.nodeValue.trim() !== '' ){
           curEl.textContent = newEl.textContent
